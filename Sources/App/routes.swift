@@ -9,9 +9,7 @@ public func routes(_ router: Router) throws {
 
     router.post("api", "acronyms") { req -> Future<Acronym> in
         return try req.content.decode(Acronym.self)
-            .flatMap(to: Acronym.self) { acronmym in
-                return acronmym.save(on: req)
-            }
+            .flatMap({ $0.save(on: req) })
     }
     
 }
